@@ -5,6 +5,8 @@
 </template>
 
 <script>
+const gmtMoscow =  10800000
+
 export default {
   data() {
     return {
@@ -14,12 +16,13 @@ export default {
   },
   methods: {
     setCurrentTimeString() {
-      this.currentDate.setTime(Date.now())
+      this.currentDate.setTime( Date.now() + gmtMoscow)
       this.timeString = this.currentDate.toISOString().split("T").pop().split(".")[0]
     },
   },
   mounted() {
     // methods can be called in lifecycle hooks, or other methods!
+    this.currentDate
     setInterval(() => this.setCurrentTimeString(), 1000);
     
   },
