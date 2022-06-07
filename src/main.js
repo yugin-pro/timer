@@ -5,13 +5,18 @@ import Clock from "./components/Clock.vue";
 import Timer from "./components/Timer.vue";
 import TimerList from "./components/TimerList.vue";
 import TimerStart from "./components/TimerStart.vue";
+import TimerPlugin from './plugins/timer'
 
 const app = createApp(App)
 
 
-app.component('Clock',Clock)
-app.component('Timer',Timer)
-app.component('TimerList',TimerList)
-app.component('TimerStart',TimerStart)
+app
+    .component('Clock', Clock)
+    .component('Timer', Timer)
+    .component('TimerList', TimerList)
+    .component('TimerStart', TimerStart)
 
-app.use(store).mount('#app')
+app
+    .use(TimerPlugin)
+    .use(store)
+    .mount('#app')
