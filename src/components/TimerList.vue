@@ -1,11 +1,22 @@
 <template>
   <div class="container">
-      <Timer/>
+    <div v-for="timer in timerList">
+      <Timer />
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    filter: String,
+  },
+  computed: {
+    timerList() {
+       return this.$store.state.timers.filter( eachTimer => eachTimer.state == this.filter)
+    },
+  },
+};
 </script>
 
 <style>

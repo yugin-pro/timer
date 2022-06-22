@@ -16,18 +16,17 @@
     <div class="row">
       <div class="col">
         <h3 class="text-center">Started</h3>
-        <TimerList />
+        <TimerList filter="started" />
       </div>
       <div class="col">
         <h3 class="text-center">Finished</h3>
-        <TimerList />
+        <TimerList filter="finished" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "App",
 };

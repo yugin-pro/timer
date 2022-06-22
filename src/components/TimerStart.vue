@@ -4,7 +4,7 @@
       <input
         type="number"
         class="form-control"
-        placeholder=5
+        v-model="timerDuration" placeholder = 5000
         aria-label="Set 5 m timer"
         aria-describedby="button-addon2"
       />
@@ -12,6 +12,7 @@
         class="btn btn-outline-secondary"
         type="button"
         id="button-addon2"
+        @click="addTimer"
       >
         Button
       </button>
@@ -21,7 +22,22 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      timerDuration: 5000
+    }
+  },
+  methods: {
+    addTimer() {
+      let currentTimer =  this.$createTimer(Date.now(), this.timerDuration)
+      this.$store.dispatch('increment', currentTimer.startTimeOut())
+      this.$store.commit('addTimer',currentTimer);
+      console.log(this.$store.getters.allTimers);
+    }
+  },
+  mounted() {
+    this.addTimer()
+  }
 }
 </script>
 
