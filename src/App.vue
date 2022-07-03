@@ -15,6 +15,10 @@
 
     <div class="row">
       <div class="col">
+        <h3 class="text-center">Ready</h3>
+        <TimerList filter="created" />
+      </div>
+      <div class="col">
         <h3 class="text-center">Started</h3>
         <TimerList filter="started" />
       </div>

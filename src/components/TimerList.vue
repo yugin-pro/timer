@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div v-for="timer in timerList">
-      <Timer />
+    <div v-for="timerRef in timerList">
+      <Timer :timer='timerRef' />
     </div>
   </div>
 </template>

@@ -1,28 +1,39 @@
 
 class Timer {
-  constructor(start, duration) {
-    this.start = start
+  constructor(duration = 60000, config = {}) {
+    this.config = config
     this.duration = duration
     this.state = 'created'
+    this.count = 0
   }
-  calculateDurationFromStart() {
-    if (this.status == 'started') {
-      return Date.now() - this.start
+  
+  set config(config) {
+    let {title} = config
+    if (title) {
+      this.title = config.title;
+      return;
     }
-    return 0
+    this.title = 'no title'
   }
-  calculateDiffDuration() {
+
+  calculateDurationFromStart() {
+    return Date.now() - this.start
+  }
+  calcRemainDuration() {
     return this.duration - this.calculateDurationFromStart()
   }
   startTimeOut() {
     this.state = 'started'
+    this.start = Date.now()
+    this.end = this.start + this.duration
+    this.count ++
     let dur = this.duration
 
-    let prom =  new Promise(function (resolve, reject) {
+    let prom = new Promise(function (resolve, reject) {
       let id = setTimeout(() => {
-        resolve({ 
+        resolve({
           id: id,
-          status: 'finished' 
+          status: 'finished'
         })
       }, dur);
     })
@@ -41,8 +52,8 @@ export default {
     app.config.globalProperties.$createTimer = (...arg) => {
       // retrieve a nested property in `options`
       // using `key` as the path
-      let [start, duration, ...rest] = arg
-      return new Timer(start, duration)
+      let [start, duration, config, ...rest] = arg
+      return new Timer(start, duration, config)
     }
   }
 }
