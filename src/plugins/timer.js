@@ -6,7 +6,10 @@ class Timer {
     this.state = 'created'
   }
   calculateDurationFromStart() {
-    return Date.now() - this.start
+    if (this.status == 'started') {
+      return Date.now() - this.start
+    }
+    return 0
   }
   calculateDiffDuration() {
     return this.duration - this.calculateDurationFromStart()
