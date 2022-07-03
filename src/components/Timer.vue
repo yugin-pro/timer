@@ -14,8 +14,8 @@
         class="d-grid gap-2 d-md-flex justify-content-md-end"
         v-if="isFinished"
       >
-        <button class="btn btn-primary me-md-2" type="button">Ready</button>
-        <button class="btn btn-primary" type="button">Restart</button>
+        <button class="btn btn-primary me-md-2" type="button">Preset</button>
+        <button class="btn btn-primary" type="button" @click="restart">Restart</button>
       </div>
     </div>
   </div>
@@ -29,7 +29,6 @@ export default {
   data() {
     return {
       header: "",
-      startCounter: 0,
       //duration:546546464654,
       remain: "",
       startTime: "00:00:01",
@@ -40,7 +39,7 @@ export default {
   },
   mounted() {
     this.header = this.timer.title;
-    this.startCounter = this.timer.count;
+    //this.startCounter = this.timer.count;
     this.remain = this.timer.duration;
     this.startTime = this.timer.start;
     this.endTime = this.timer.end;
@@ -55,10 +54,18 @@ export default {
     }, 100);
   },
   methods: {
-    showDiff() {
-      this.count++;
+    restart() {
+      this.timer.startTimeOut()
+      this.$store.commit("changeValue");
     },
   },
+  computed: {
+    // a computed getter
+    startCounter() {
+      // `this` points to the component instance
+      return this.timer.count;
+    }
+  }
 };
 </script>
 

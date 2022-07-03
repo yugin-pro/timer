@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-for="timerRef in timerList">
+    <div v-for="timerRef in timerList" :key="timerRef.id">
       <Timer :timer='timerRef' />
     </div>
   </div>

@@ -1,6 +1,7 @@
 
 class Timer {
   constructor(duration = 60000, config = {}) {
+    this.id = Date.now()
     this.config = config
     this.duration = duration
     this.state = 'created'

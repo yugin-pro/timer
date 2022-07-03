@@ -15,7 +15,7 @@
 
     <div class="row">
       <div class="col">
-        <h3 class="text-center">Ready</h3>
+        <h3 class="text-center">Preset</h3>
         <TimerList filter="created" />
       </div>
       <div class="col">
