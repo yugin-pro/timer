@@ -84,7 +84,7 @@ export default {
       return Math.floor(this.remain / 60000);
     },
     showRemainSec() {
-      return Math.floor(this.remain / 1000) - Math.floor(this.remain / 60000);
+      return Math.floor(this.remain / 1000) - Math.floor(this.remain / 60000) * 60;
     },
     isStarted() {
       return this.state = 'started' ? true : false;
