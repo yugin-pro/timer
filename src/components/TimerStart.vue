@@ -5,7 +5,7 @@
         type="number"
         class="form-control"
         v-model="timerDuration"
-        placeholder="5000"
+        placeholder="5"
         aria-label="Set 5 m timer"
         aria-describedby="button-addon2"
       />
@@ -66,18 +66,27 @@
 export default {
   data() {
     return {
-      timerDuration: 5000,
+      timerDuration: 5,
       title: "",
     };
   },
   methods: {
     addTimer() {
-      let currentTimer = this.$createTimer(this.timerDuration, {
-        title: this.title,
-      });
-      this.$store.dispatch("increment", currentTimer.startTimeOut());
-      this.$store.commit("addTimer", currentTimer);
-      this.title = "";
+      if (
+        typeof this.timerDuration == "number" &&
+        this.timerDuration >= 1 &&
+        this.timerDuration <= 3000
+      ) {
+        let currentTimer = this.$createTimer(
+          Math.floor(this.timerDuration) * 60 * 1000,
+          {
+            title: this.title,
+          }
+        );
+        this.$store.dispatch("increment", currentTimer.startTimeOut());
+        this.$store.commit("addTimer", currentTimer);
+        this.title = "";
+      }
     },
   },
   mounted() {
