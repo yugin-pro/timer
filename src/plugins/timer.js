@@ -5,16 +5,21 @@ class Timer {
     this.config = config
     this.duration = duration
     this.state = 'created'
+    this.isRinging = false
     this.count = 0
   }
   
   set config(config) {
-    let {title} = config
+    let {title, ringtone} = config
     if (title) {
       this.title = config.title;
-      return;
+    } else {
+      this.title = 'Timer'
     }
-    this.title = 'no title'
+    if (ringtone) {
+      this.ringtone = config.ringtone;
+    } 
+    
   }
 
   calculateDurationFromStart() {
@@ -34,11 +39,14 @@ class Timer {
       let id = setTimeout(() => {
         resolve({
           id: id,
-          status: 'finished'
+          status: 'finished',
         })
       }, dur);
     })
-    prom.then(res => this.state = 'finished')
+    prom.then(res => {
+      this.state = 'finished'
+      this.isRinging = true
+    })
     return prom
   }
   stopTimerOut() {

@@ -72,15 +72,18 @@ export default {
   },
   methods: {
     addTimer() {
+      let msPerMinute = 60000
+
       if (
         typeof this.timerDuration == "number" &&
         this.timerDuration >= 1 &&
         this.timerDuration <= 3000
       ) {
         let currentTimer = this.$createTimer(
-          Math.floor(this.timerDuration) * 60 * 1000,
+          Math.floor(this.timerDuration) * msPerMinute,
           {
             title: this.title,
+            ringtone: './sounds/03b3d406b7af1f6.mp3'
           }
         );
         this.$store.dispatch("increment", currentTimer.startTimeOut());
