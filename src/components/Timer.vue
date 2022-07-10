@@ -7,26 +7,38 @@
     </div>
     <div class="card-header">{{ showHeader }}</div>
     <div class="card-body">
-      <div  v-if="checkRinging">
+      <div v-if="checkRinging">
         <AudioPleer class="alarm" :timer="timer" />
       </div>
       <h5 class="card-title">Duration: {{ showDurationMinutes }} minutes</h5>
-      <h6 class="card-subtitle mb-2 text-muted" v-if="state === 'started'">
+      <h6 class="card-subtitle mb-2 text-muted" v-if="checkState === 'started'">
         Remain: {{ showRemainMin }} min {{ showRemainSec }} sec
       </h6>
-      <p class="card-text">started times: {{ startCounter }}</p>
-      <p class="card-text">
-        Started:
-        <b>{{ new Date(startTime).toLocaleTimeString("ru-RU") }}</b> End time:
+      <p class="card-text" v-if="checkState === 'started' || checkState === 'finished'">
+        started times: {{ startCounter }}
+      </p>
+      <p class="card-text" v-if="checkState === 'started' || checkState === 'finished'">
+        Start:
+        <b>{{ new Date(startTime).toLocaleTimeString("ru-RU") }}</b> Stop:
         <b>{{ new Date(endTime).toLocaleTimeString("ru-RU") }}</b>
       </p>
       <div
         class="d-grid gap-2 d-md-flex justify-content-md-end"
-        v-if="isFinished"
+        v-if="checkState === 'finished'"
       >
-        <button class="btn btn-primary me-md-2" type="button">Preset</button>
+        <button class="btn btn-primary me-md-2" type="button" @click="preset">
+          Preset
+        </button>
         <button class="btn btn-primary" type="button" @click="restart">
           Restart
+        </button>
+      </div>
+      <div
+        class="d-grid gap-2 d-md-flex justify-content-md-end"
+        v-if="checkState === 'created'"
+      >
+        <button class="btn btn-primary" type="button" @click="restart">
+          Start
         </button>
       </div>
     </div>
@@ -43,8 +55,8 @@ export default {
       // header: "",
       // duration:546546464654,
       remain: "",
-      startTime: "00:00:01",
-      endTime: "00:00:01",
+      startTime: "00:00:00",
+      endTime: "00:00:00",
       state: "",
       isFinished: false,
       isRinging: false,
@@ -72,6 +84,11 @@ export default {
       this.timer.startTimeOut();
       this.$store.commit("changeValue");
     },
+    preset() {
+      this.timer.state = 'created'
+      this.timer.count = 0
+      this.$store.commit("changeValue");
+    },
   },
   computed: {
     // a computed getter
@@ -94,7 +111,10 @@ export default {
       );
     },
     checkRinging() {
-      return this.isRinging
+      return this.isRinging;
+    },
+    checkState(){
+      return this.timer.state
     }
   },
 };

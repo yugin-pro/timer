@@ -37,7 +37,7 @@
                 class="form-check-input"
                 type="checkbox"
                 id="flexSwitchCheckChecked"
-                checked
+                v-model="checked"
               />
               <label class="form-check-label" for="flexSwitchCheckChecked"
                 >Start auto</label
@@ -55,6 +55,17 @@
                 v-model="title"
               />
             </div>
+            <div class="input-group input-group-sm mb-3">
+              <label class="input-group-text" for="inputGroupSelect01"
+                >Sounds</label
+              >
+              <select class="form-select" id="inputGroupSelect01">
+                <option selected>none</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -68,11 +79,12 @@ export default {
     return {
       timerDuration: 5,
       title: "",
+      checked: true,
     };
   },
   methods: {
     addTimer() {
-      let msPerMinute = 60000
+      let msPerMinute = 6000;
 
       if (
         typeof this.timerDuration == "number" &&
@@ -83,10 +95,12 @@ export default {
           Math.floor(this.timerDuration) * msPerMinute,
           {
             title: this.title,
-            ringtone: './sounds/03b3d406b7af1f6.mp3'
+            ringtone: "./sounds/03b3d406b7af1f6.mp3",
           }
         );
-        this.$store.dispatch("increment", currentTimer.startTimeOut());
+        if (this.checked) {
+          this.$store.dispatch("updateList", currentTimer.startTimeOut());
+        }
         this.$store.commit("addTimer", currentTimer);
         this.title = "";
       }

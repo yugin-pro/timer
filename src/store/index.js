@@ -21,7 +21,7 @@ export default createStore({
     }
   },
   actions: {
-    async increment (context, startedTimerPromise) {
+    async updateList (context, startedTimerPromise) {
       await startedTimerPromise
       context.commit('changeValue')
     }
