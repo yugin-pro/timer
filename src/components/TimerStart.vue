@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     addTimer() {
-      let msPerMinute = 6000;
+      let msPerMinute = 60000;
 
       if (
         typeof this.timerDuration == "number" &&

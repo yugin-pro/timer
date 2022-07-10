@@ -1,7 +1,7 @@
 <template>
   <div style="width: 100%; height: 100%" v-if="!close">
     <div class="alarm-image float-end" @click="onClose">
-      <img src="/animated/stopwatch-transparen.gif" alt="" />
+      <img :src="gifUrl" />
     </div>
     <audio autoplay :src="timer.ringtone"></audio>
   </div>
@@ -14,20 +14,14 @@ export default {
   },
   data() {
     return {
-      audio: undefined,
-      currentSeconds: 0,
-      durationSeconds: 0,
-      innerLoop: true,
-      loaded: true,
+      gifUrl: '',
       playing: true,
-      previousVolume: 35,
-      showVolume: false,
-      volume: 100,
       close: false,
     };
   },
   mounted() {
     //console.log(this.timer);
+    this.gifUrl = './animated/stopwatch-transparen.gif'
   },
   methods: {
     onClose() {

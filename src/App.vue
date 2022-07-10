@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <img alt="Vue logo" src="./assets/logo.png" />
+        <img alt="Vue logo" :src="logoUrl" />
       </div>
       <div class="col">
         <Clock />
@@ -33,6 +33,11 @@
 <script>
 export default {
   name: "App",
+  data () {
+    return {
+      logoUrl: "./logo.png"
+    }
+  }
 };
 </script>
 
