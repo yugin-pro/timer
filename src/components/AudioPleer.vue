@@ -27,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.timer);
+    //console.log(this.timer);
   },
   methods: {
     onClose() {

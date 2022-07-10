@@ -2,7 +2,9 @@
   <div class="card mt-2">
     <div class="position-relative">
       <div class="position-absolute top-0 end-0">
-        <button type="button" class="btn btn-danger btn-sm">X</button>
+        <button type="button" class="btn btn-danger btn-sm" @click="removeTimer">
+          X
+        </button>
       </div>
     </div>
     <div class="card-header">{{ showHeader }}</div>
@@ -14,10 +16,16 @@
       <h6 class="card-subtitle mb-2 text-muted" v-if="checkState === 'started'">
         Remain: {{ showRemainMin }} min {{ showRemainSec }} sec
       </h6>
-      <p class="card-text" v-if="checkState === 'started' || checkState === 'finished'">
+      <p
+        class="card-text"
+        v-if="checkState === 'started' || checkState === 'finished'"
+      >
         started times: {{ startCounter }}
       </p>
-      <p class="card-text" v-if="checkState === 'started' || checkState === 'finished'">
+      <p
+        class="card-text"
+        v-if="checkState === 'started' || checkState === 'finished'"
+      >
         Start:
         <b>{{ new Date(startTime).toLocaleTimeString("ru-RU") }}</b> Stop:
         <b>{{ new Date(endTime).toLocaleTimeString("ru-RU") }}</b>
@@ -85,9 +93,12 @@ export default {
       this.$store.commit("changeValue");
     },
     preset() {
-      this.timer.state = 'created'
-      this.timer.count = 0
+      this.timer.state = "created";
+      this.timer.count = 0;
       this.$store.commit("changeValue");
+    },
+    removeTimer() {
+      this.$store.commit("removeTimer", this.timer);
     },
   },
   computed: {
@@ -113,9 +124,9 @@ export default {
     checkRinging() {
       return this.isRinging;
     },
-    checkState(){
-      return this.timer.state
-    }
+    checkState() {
+      return this.timer.state;
+    },
   },
 };
 </script>

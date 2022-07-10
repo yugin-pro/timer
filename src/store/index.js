@@ -18,6 +18,11 @@ export default createStore({
       let timerss = state.timers 
       state.timers = []
       state.timers = timerss
+    },
+    removeTimer(state,timer){
+      let index = state.timers.indexOf(timer)
+      delete state.timers[index]
+      state.timers.splice(index,1)
     }
   },
   actions: {
