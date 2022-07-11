@@ -7,6 +7,7 @@ import TimerList from "./components/TimerList.vue";
 import TimerStart from "./components/TimerStart.vue";
 import AudioPleer from "./components/AudioPleer.vue"
 import TimerPlugin from './plugins/timer'
+import Utils from './plugins/utils'
 
 const app = createApp(App)
 
@@ -21,4 +22,5 @@ app
 app
     .use(TimerPlugin)
     .use(store)
+    .use(Utils)
     .mount('#app')

@@ -12,9 +12,9 @@
       <div v-if="checkRinging">
         <AudioPleer class="alarm" :timer="timer" />
       </div>
-      <h5 class="card-title">Duration: {{ showDurationMinutes }} minutes</h5>
+      <h5 class="card-title">{{  $utils.durationToTimeString(timer.duration) }}</h5>
       <h6 class="card-subtitle mb-2 text-muted" v-if="checkState === 'started'">
-        Remain: {{ showRemainMin }} min {{ showRemainSec }} sec
+        Remain: {{  $utils.durationToTimeString(showRemain) }} sec
       </h6>
       <p
         class="card-text"
@@ -120,6 +120,9 @@ export default {
       return (
         Math.floor(this.remain / 1000) - Math.floor(this.remain / 60000) * 60
       );
+    },
+    showRemain() {
+      return this.remain;
     },
     checkRinging() {
       return this.isRinging;
