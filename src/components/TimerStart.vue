@@ -89,7 +89,7 @@ export default {
       if (
         typeof this.timerDuration == "number" &&
         this.timerDuration >= 1 &&
-        this.timerDuration <= 3000
+        this.timerDuration <= 1440
       ) {
         let currentTimer = this.$createTimer(
           Math.floor(this.timerDuration) * msPerMinute,
